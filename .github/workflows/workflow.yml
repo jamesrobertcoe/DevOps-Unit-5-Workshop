@@ -1,6 +1,10 @@
 name: CI Workshop
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]       # Only run when code is pushed to 'main'
+  pull_request:             # Also run for any PR (to any branch)
+
 
 jobs:
   build:
@@ -18,8 +22,8 @@ jobs:
 
       - name: Build and Test .NET
         run: |
-          dotnet build --configuration Release
-          dotnet test --verbosity normal
+          dotnet build --configuration Release --verbosity minimal
+          dotnet test --verbosity minimal
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
